@@ -1,0 +1,20 @@
+{
+  "name": "DingYueSDKUniplugin",
+  "id": "DingYueSDKUniplugin",
+  "version": "0.2.3",
+  "description": "使用订阅SDK管理购买流程",
+  "_dp_type": "nativeplugin",
+  "_dp_nativeplugin": {
+      "ios": {
+          "plugins": [{
+              "type": "module",
+              "name": "DingYueSDKUniplugin",
+              "class": "DingYueTools"
+          }],
+          "frameworks": ["WebKit.framework","Foundation.framework","StoreKit.framework","UIKit.framework","iAd.framework","AdSupport.framework","AppTrackingTransparency.framework","FCUUID.framework","SSZipArchive.framework","UICKeyChainStore.framework","AnyCodable.framework","DingYue_iOS_SDK.framework"],
+          "embedFrameworks": ["FCUUID.framework","SSZipArchive.framework","UICKeyChainStore.framework","AnyCodable.framework","DingYue_iOS_SDK.framework"],
+          "integrateType": "framework",
+          "deploymentTarget": "11.0"
+      }
+  }
+}

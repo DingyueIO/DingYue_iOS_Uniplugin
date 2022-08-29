@@ -1,0 +1,4 @@
+framework module DingYueSDKUniplugin {
+  header "DingYueSDKUniplugin-Swift.h"
+  requires objc
+}
