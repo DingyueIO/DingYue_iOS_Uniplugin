@@ -1,7 +1,7 @@
 {
   "name": "DingYueSDKUniplugin",
   "id": "DingYueSDKUniplugin",
-  "version": "0.2.3",
+  "version": "0.2.8",
   "description": "使用订阅SDK管理购买流程",
   "_dp_type": "nativeplugin",
   "_dp_nativeplugin": {

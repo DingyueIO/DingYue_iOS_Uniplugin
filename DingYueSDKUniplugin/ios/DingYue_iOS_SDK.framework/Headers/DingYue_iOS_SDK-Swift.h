@@ -315,8 +315,9 @@ typedef SWIFT_ENUM(NSUInteger, PeriodUnit, closed) {
 };
 
 @class NSData;
-@class SwitchItem;
 @class Subscription;
+@class GlobalSwitch;
+@class SimpleStatusResult;
 
 SWIFT_CLASS("_TtC15DingYue_iOS_SDK11DYMobileSDK")
 @interface DYMobileSDK : NSObject
@@ -331,7 +332,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, copy) NSData * _Nullable apnsT
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nullable apnsTokenString;)
 + (NSString * _Nullable)apnsTokenString SWIFT_WARN_UNUSED_RESULT;
 /// Activate SDK
-+ (void)activateWithCompletion:(void (^ _Nonnull)(NSArray<SwitchItem *> * _Nullable, NSArray<NSDictionary<NSString *, id> *> * _Nullable, NSError * _Nullable))completion;
++ (void)activateWithCompletion:(void (^ _Nonnull)(NSDictionary<NSString *, id> * _Nullable, NSError * _Nullable))completion;
 + (void)reportIdfaWithIdfa:(NSString * _Nonnull)idfa;
 + (void)reportDeviceTokenWithToken:(NSString * _Nonnull)token;
 + (void)reportAttributionWithAdjustId:(NSString * _Nullable)adjustId appsFlyerId:(NSString * _Nullable)appsFlyerId amplitudeId:(NSString * _Nullable)amplitudeId;
@@ -349,12 +350,28 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nu
 + (void)validateReceiptRecover:(NSString * _Nonnull)receipt completion:(void (^ _Nonnull)(NSDictionary<NSString *, id> * _Nullable, NSError * _Nullable))completion;
 /// MARK: - Events
 + (void)trackWithEvent:(NSString * _Nonnull)event extra:(NSString * _Nullable)extra user:(NSString * _Nullable)user;
+/// MARK: - load native paywall
++ (void)loadNativePaywallWithPaywallFullPath:(NSString * _Nonnull)paywallFullPath basePath:(NSString * _Nonnull)basePath;
 + (void)handlePushNotification:(NSDictionary * _Nonnull)userInfo completion:(NSError * _Nullable)completion;
 + (BOOL)getSwitchStatusWithSwitchName:(NSString * _Nonnull)switchName SWIFT_WARN_UNUSED_RESULT;
+/// MARK: - Switchs info
++ (void)createGlobalSwitchWithGlobalSwitch:(GlobalSwitch * _Nonnull)globalSwitch completion:(void (^ _Nonnull)(SimpleStatusResult * _Nullable, NSError * _Nullable))completion;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
+
+
+/// globalSwitch
+SWIFT_CLASS("_TtC15DingYue_iOS_SDK12GlobalSwitch")
+@interface GlobalSwitch : NSObject
+@property (nonatomic, copy) NSString * _Nonnull showName;
+@property (nonatomic, copy) NSString * _Nonnull varName;
+@property (nonatomic) BOOL value;
+- (nonnull instancetype)initWithShowName:(NSString * _Nonnull)showName varName:(NSString * _Nonnull)varName value:(BOOL)value OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
+@end
 
 
 
@@ -368,6 +385,16 @@ SWIFT_CLASS("_TtC15DingYue_iOS_SDK24OpenISO8601DateFormatter")
 - (NSDate * _Nullable)dateFromString:(NSString * _Nonnull)string SWIFT_WARN_UNUSED_RESULT;
 @end
 
+
+
+SWIFT_CLASS("_TtC15DingYue_iOS_SDK18SimpleStatusResult")
+@interface SimpleStatusResult : NSObject
+/// indicated why this operation fails
+@property (nonatomic, copy) NSString * _Nullable errmsg;
+@property (nonatomic, copy) NSString * _Nullable stacktrace;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
+@end
 
 
 /// subscription metadata object
@@ -405,6 +432,15 @@ SWIFT_CLASS("_TtC15DingYue_iOS_SDK10SwitchItem")
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
 
+
+
+SWIFT_CLASS("_TtC15DingYue_iOS_SDK14UserProperties")
+@interface UserProperties : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, copy) NSDictionary<NSString *, NSString *> * _Nullable extraData;)
++ (NSDictionary<NSString *, NSString *> * _Nullable)extraData SWIFT_WARN_UNUSED_RESULT;
++ (void)setExtraData:(NSDictionary<NSString *, NSString *> * _Nullable)value;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
 
 #if __has_attribute(external_source_symbol)
 # pragma clang attribute pop
