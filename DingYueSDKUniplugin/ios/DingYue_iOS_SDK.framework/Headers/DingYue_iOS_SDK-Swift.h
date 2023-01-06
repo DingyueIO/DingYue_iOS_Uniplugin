@@ -356,6 +356,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nu
 + (BOOL)getSwitchStatusWithSwitchName:(NSString * _Nonnull)switchName SWIFT_WARN_UNUSED_RESULT;
 /// MARK: - Switchs info
 + (void)createGlobalSwitchWithGlobalSwitch:(GlobalSwitch * _Nonnull)globalSwitch completion:(void (^ _Nonnull)(SimpleStatusResult * _Nullable, NSError * _Nullable))completion;
+/// MARK: - request device unique uuid
++ (NSString * _Nonnull)requestDeviceUUID SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
